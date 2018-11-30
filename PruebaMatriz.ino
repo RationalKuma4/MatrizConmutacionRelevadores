@@ -48,7 +48,7 @@ void ReadPins();
 void CreaAbonados();
 Abonado BucarAbonado(String numeroMarcado);
 void Conmutar(Abonado abonadoDestino, Abonado abonadoOrigen);
-void Liberar(Abonado abonadoDestino, Abonado abonadoOrigen);
+void Liberar();
 
 void setup()
 {
@@ -68,20 +68,47 @@ void loop()
 	CreaAbonados();
 
 	String numMarc;
+	Abonado encontrado, origen;
 
 	if (s13 == 1)
 	{
 		numMarc = String(s11) + String(s12);
-		auto encontrado = BucarAbonado(numMarc);
-		auto origen = BucarAbonado("00");
+		encontrado = BucarAbonado(numMarc);
+		origen = BucarAbonado("00");
 		Conmutar(encontrado, origen);
 	}
-	else if (s13 == 0)
+	else if (s23 == 1)
 	{
-		numMarc = String(s11) + String(s12);
-		auto encontrado = BucarAbonado(numMarc);
-		auto origen = BucarAbonado("00");
-		Liberar(encontrado, origen);
+		numMarc = String(s21) + String(s22);
+		encontrado = BucarAbonado(numMarc);
+		origen = BucarAbonado("01");
+		Conmutar(encontrado, origen);
+	}
+	else if (s33 == 1)
+	{
+		numMarc = String(s31) + String(s32);
+		encontrado = BucarAbonado(numMarc);
+		origen = BucarAbonado("10");
+		Conmutar(encontrado, origen);
+	}
+	else if (s43 == 1)
+	{
+		numMarc = String(s41) + String(s42);
+		encontrado = BucarAbonado(numMarc);
+		origen = BucarAbonado("11");
+		Conmutar(encontrado, origen);
+	}
+	else
+	{
+		Liberar();
+	}
+
+	/*else if (s13 == 0)
+	{
+	numMarc = String(s11) + String(s12);
+	auto encontrado = BucarAbonado(numMarc);
+	auto origen = BucarAbonado("00");
+	Liberar(encontrado, origen);
 	}
 
 	if (s23 == 1)
@@ -99,13 +126,7 @@ void loop()
 		Liberar(encontrado, origen);
 	}
 
-	if (s33 == 1)
-	{
-		numMarc = String(s31) + String(s32);
-		auto encontrado = BucarAbonado(numMarc);
-		auto origen = BucarAbonado("10");
-		Conmutar(encontrado, origen);
-	}
+
 	else if (s33 == 0)
 	{
 		numMarc = String(s31) + String(s32);
@@ -114,20 +135,14 @@ void loop()
 		Liberar(encontrado, origen);
 	}
 
-	if (s43 == 1)
-	{
-		numMarc = String(s41) + String(s42);
-		auto encontrado = BucarAbonado(numMarc);
-		auto origen = BucarAbonado("11");
-		Conmutar(encontrado, origen);
-	}
+
 	else if (s43 == 0)
 	{
 		numMarc = String(s41) + String(s42);
 		auto encontrado = BucarAbonado(numMarc);
 		auto origen = BucarAbonado("11");
 		Liberar(encontrado, origen);
-	}
+	}*/
 }
 
 void SetPinsMode()
@@ -253,7 +268,7 @@ void Liberar(Abonado abonadoDestino, Abonado abonadoOrigen)
 		digitalWrite(abonadoOrigen.rele, HIGH);
 		digitalWrite(abonadoDestino.rele, HIGH);*/
 	}
-	/*digitalWrite(S14, LOW);
+	digitalWrite(S14, LOW);
 	digitalWrite(S24, LOW);
 	digitalWrite(S34, LOW);
 	digitalWrite(S44, LOW);
@@ -261,7 +276,7 @@ void Liberar(Abonado abonadoDestino, Abonado abonadoOrigen)
 	digitalWrite(R1, HIGH);
 	digitalWrite(R2, HIGH);
 	digitalWrite(R3, HIGH);
-	digitalWrite(R4, HIGH);*/
+	digitalWrite(R4, HIGH);
 }
 
 /*
